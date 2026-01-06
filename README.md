@@ -1,16 +1,57 @@
-## Hi there 👋
+# 👋 Olá, eu sou o Railan!
 
-<!--
-**railan-santos/railan-santos** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+🎓 Formado em Análise e Desenvolvimento de Sistemas  
+💻 Desenvolvedor com foco em Backend e Cloud  
 
-Here are some ideas to get you started:
+---
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+## 🚀 Sobre mim
+Sou formado em Análise e Desenvolvimento de Sistemas e possuo conhecimento em desenvolvimento de aplicações full stack, criação de APIs REST e integração com bancos de dados.  
+Atualmente estou aprofundando meus conhecimentos em Docker e computação em nuvem.
+
+---
+
+## 🛠️ Tecnologias & Ferramentas
+
+**Backend**
+- Java  
+- Spring Boot  
+- Spring Security  
+- JPA / Hibernate  
+
+**Frontend (base)**
+- HTML  
+- CSS  
+- JavaScript  
+- React  
+
+**Banco de Dados**
+- MySQL  
+- PostgreSQL  
+
+**DevOps & Cloud**
+- Docker  
+- AWS  
+
+**Outros**
+- Git & GitHub  
+- APIs REST  
+- Postman  
+
+---
+
+## 📚 Atualmente estudando
+- Docker na prática com aplicações Spring Boot  
+- Deploy de aplicações  
+- Boas práticas de arquitetura backend  
+
+---
+
+## 🎯 Objetivo
+Atuar como profissional na área da tecnologia, evoluindo continuamente minhas habilidades técnicas.
+
+---
+
+## 📫 Contato
+- 💼 LinkedIn: https://www.linkedin.com/in/railansantos/  
+- 📧 Email: railanpdssantos@gmail.com
