@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>railan-santos / README.md</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      background-color: #05070a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+      color: #c9d1d9;
+    }
+
+    .terminal-window {
+      width: 100%;
+      max-width: 1240px;
+      background-color: #0b0f17;
+      border: 1px solid #1c2333;
+      border-radius: 12px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255, 255, 255, 0.04);
+      overflow: hidden;
+    }
+
+    .terminal-header {
+      background-color: #0f141f;
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      border-bottom: 1px solid #1c2333;
+    }
+
+    .window-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .control-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .dot-red { background-color: #ff5f56; }
+    .dot-yellow { background-color: #ffbd2e; }
+    .dot-green { background-color: #27c93f; }
+
+    .window-title {
+      font-size: 13px;
+      color: #8b949e;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+    }
+
+    .terminal-body {
+      padding: 28px 32px;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 36px;
+    }
+
+    @media (max-width: 900px) {
+      .terminal-body {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+    }
+
+    /* Coluna Esquerda: ASCII */
+    .ascii-column {
+      display: flex;
+      flex-col;
+      flex-direction: column;
+      justify-content: space-between;
+      border-right: 1px solid #161d2a;
+      padding-right: 28px;
+    }
+
+    @media (max-width: 900px) {
+      .ascii-column {
+        border-right: none;
+        border-bottom: 1px solid #161d2a;
+        padding-right: 0;
+        padding-bottom: 24px;
+      }
+    }
+
+    .file-name {
+      color: #8b949e;
+      font-size: 13px;
+      margin-bottom: 16px;
+    }
+
+    .ascii-art {
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+      font-size: 5px;
+      line-height: 5.2px;
+      color: #d1d7e0;
+      white-space: pre;
+      overflow-x: auto;
+      letter-spacing: 0px;
+      user-select: all;
+    }
+
+    @media (min-width: 1100px) {
+      .ascii-art {
+        font-size: 6px;
+        line-height: 6.2px;
+      }
+    }
+
+    .status-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 24px;
+      font-size: 13px;
+      color: #3fb950;
+      font-weight: 500;
+    }
+
+    .status-badge::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background-color: #3fb950;
+      box-shadow: 0 0 8px #3fb950;
+    }
+
+    /* Coluna Direita: Informações */
+    .info-column {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: 20px;
+      padding-top: 4px;
+    }
+
+    .profile-title {
+      color: #f0883e;
+      font-size: 18px;
+      font-weight: 600;
+      border-bottom: 1px solid #21262d;
+      padding-bottom: 12px;
+      margin-bottom: 4px;
+    }
+
+    .spec-table {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      row-gap: 14px;
+      font-size: 13.5px;
+    }
+
+    .spec-key {
+      color: #f0883e;
+      font-weight: 500;
+    }
+
+    .spec-value {
+      color: #e6edf3;
+    }
+
+    .contact-section {
+      margin-top: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .contact-title {
+      color: #f0883e;
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .contact-row {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      font-size: 13.5px;
+    }
+
+    .contact-row a {
+      color: #e6edf3;
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+
+    .contact-row a:hover {
+      color: #58a6ff;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="terminal-window">
+    <!-- Barra Superior / macOS Header -->
+    <div class="terminal-header">
+      <div class="window-controls">
+        <span class="control-dot dot-red"></span>
+        <span class="control-dot dot-yellow"></span>
+        <span class="control-dot dot-green"></span>
+      </div>
+      <div class="window-title">railan-santos / README.md</div>
+    </div>
+
+    <!-- Corpo do Terminal -->
+    <div class="terminal-body">
+      
+      <!-- Coluna Esquerda: ASCII Art -->
+      <div class="ascii-column">
+        <div>
+          <div class="file-name">profile.ascii</div>
+          <pre class="ascii-art">
+                                                                             @                                                                                         
+                                                                      @@@@@@@@@@@@@@@@@@@@@@@@@                                                                        
+                                                       @@        @@@@@@@@@@@@@@@@@@@   @@@@@@@@@@@@                                                                    
+                                                    @     @@@@@@@@@@@@                     @@  @@@@@@@@@@@@@@@@                                                        
+                                                @@@@@@@@@@@@@@@@@    @@@  @@@    @@@@@@@ @        @@@@@@@@@@@@@@@@@@                                                   
+                                            @@@@@@@@@@@@@@@    @@     @@@@@@@@@@         @ @@@               @@@@@@@@@@                                                
+                                        @@@@@@@@                @@@@@               @ @@@@          @   @@         @@@@@@@                                             
+                                      @@@@@@       @                  @          @@ @@@@        @@@@@     @@           @@@@@@                                          
+                     	           @@@@@     @@@     @   @@@                   @@        @@                    @         @@@@@                                        
+                                  @@@@     @  @       @      @ @@@@ @@      @@@         @@@   @@     @@@@@@@@@@  @           @@@@                                      
+                                @@@      @@ @@    @      @ @  @@   @   @  @@      @   @@   @@@                  @@    @@@@    @@@                                     
+                               @@@@     @@@@  @         @ @ @    @  @@          @     @@  @@      @@    @         @@@   @ @@    @@@@@                                  
+                              @@@    @@       @  @    @@  @ @    @     @@ @@@@@@@ @@@@@@  @  @   @@ @@@@@@@ @@@@@@  @@@ @         @@@@                                 
+                             @@@      @  @@@@ @  @@@@@@@   @@    @ @@@@@  @  @   @@@    @@   @  @@  @     @       @     @ @@@@      @@@                                
+                   @       @@@        @@  @  @  @@  @@   @@@ @@ @@@@       @   @    @@@@@ @@@ @@@ @ @         @   @ @@      @@ @@     @@                               
+                  @@      @@    @            @  @  @    @             @@@@@ @@  @   @                  @@ @ @@ @ @  @  @ @@ @@  @@@@   @@                              
+                @@@       @     @     @  @  @@ @@           @ @ @         @  @@@@@@@ @@          @@@       @ @   @  @        @     @@   @@                             
+                @@           @  @       @  @@ @      @   @@ @ @ @@@@   @@@ @       @    @@  @@@@             @   @@ @  @@    @@ @@   @@  @@                            
+               @@               @       @  @   @@@@@@  @@ @ @ @    @    @@@  @@@  @@   @@@@@@  @@@@@@@@@@   @  @    @  @@   @          @  @@                           
+              @@                @       @ @@        @  @@   @ @ @@@@  @ @    @     @  @@  @@  @@        @@@ @        @   @  @  @@@@@       @@                          
+             @@                @@         @       @@  @                  @@  @@@   @@ @     @@        @     @   @@   @ @@   @@     @@@      @@                         
+            @@             @ @@@        @@@     @@ @      @  @     @@     @@@ @        @@@@@@ @@@@   @@   @     @@  @@ @@    @    @  @ @     @@                        
+            @@            @          @@@@   @  @@@   @@ @@   @         @@   @@   @@@@@       @    @@@@   @@@ @   @   @ @@    @    @          @@@                     
+            @@      @@@   @        @@@ @  @  @@@  @@@@ @@   @   @@@@  @    @          @ @@       @@          @@   @@@  @     @@   @@@@   @    @@                     
+           @@                @@     @  @  @  @  @          @  @        @@    @ @     @  @ @          @   @          @    @@   @       @ @@@ @  @@                      
+           @@             @  @     @@ @@  @@ @  @      @        @@@@     @@@ @@   @     @ @ @    @@@  @    @@@@     @@@@  @   @           @    @@                      
+          @@                 @     @  @@   @    @   @ @@@ @ @ @         @@    @@@@  @@@ @@  @ @@         @       @@   @    @ @    @@@@     @    @@                 
+      @@                   @    @    @  @@ @@@@              @@@@@@@@@@  @@           @@      @     @             @@      @@      @@  @    @ @@                  
+        @@@                          @  @      @  @@ @@   @@ @@@@@ @ @@@   @@   @ @@@@  @ @@   @@@@@@@@@@@@@@@@@@@@@  @@ @@  @@       @  @    @  @@                  
+     @@           @         @    @@  @ @@ @ @@    @       @             @  @@@    @       @@@@  @@@ @         @@@@    @@@  @@@@@   @        @ @@                  
+ @ @    @@           @      @@          @  @    @ @  @    @@@   @   @@@ @ @@ @    @ @ @@@@  @@@ @ @@     @@@@@      @@      @@@@  @@   @@@     @  @@                   
+ @  @  @@            @     @    @@@@@@@@   @@  @@ @@ @@@@   @   @@    @ @   @ @ @@@@@ @  @@      @  @@ @@    @@@@@@    @@ @   @@  @@@@@@@@@@      @@                
+       @@               @@     @@   @       @@@@@@ @   @@@  @@@   @@  @@    @         @      @@@@@@@@@@@@  @@  @@@@@@@ @      @           @@  @    @@                  
+   @   @@                      @       @@@@     @@ @      @@@@@@@@@@@@@@@@@ @@@@@@@  @@   @@@@@@@@@@@@   @@@@     @@@@@  @@@@                 @    @@                  
+ @    @@            @@ @@           @@@@@@         @@@@@      @@@@@@@@@@@@@   @@ @   @  @@@@   @    @@ @@@@ @@@@@@      @@@@@@@@@@@@@@          @@  @@              
+ @   @@            @@@    @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@    @@@        @@@     @ @@@@@      @    @@  @@@  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@   @  @@              
+ @@  @@            @    @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@  @@@@    @@@@@@@@@   @@   @@@@ @@@@@@ @@@@@@@@@@@@@@@@@@@@@@@@@@@   @ @@@@@   @@@  @  @              
+ @ @  @               @@@@        @@               @@@@@@@@@@@@@@@@@@@@@@  @@@  @@@@@  @@@@@@@@@@@    @@@@@@@@@@@            @   @            @@@@ @ @@ @     
+ @ @@ @         @  @@@@                                  @  @@@@@@@ @@  @@@@ @@@@@@@@@@@@    @@      @@@                                  @@@    @@  @@ @@             
+  @ @@            @@           @                                 @@@ @        @@      @@   @    @@@@@@@                                @@         @@ @@ @@ 
+   @ @                      @@@                                    @@ @@@        @   @@   @         @@                                            @@@ @ @@ 
+   @@@                                                                  @ @  @         @@@@@    @@@@                                                @ @ @@             
+ @                                                                      @ @  @@@@@@@@      @    @@                            @@@@@@@@@@@@@          @  @@           
+ @   @                        @@@@@@@@@@@@@@@                           @@    @@   @@@@@@  @  @                       @@@@@@@@@@@@@@@@@@@@@@@@@         @@ 
+ @   @                       @@@@           @                            @@    @@   @@  @@ @  @@                                              @@        @@           
+     @                           @@@@@@@                                 @@    @@ @@ @@ @  @  @@                     @@@@       @@@@@@         @@@@     @@             
+    @@                       @@@      @@@@@@@@@@@                        @@  @@@@    @@@@  @  @@                 @@@@@@@@@@@@@@@      @@@@              @@ 
+    @@                          @@@@@@        @@@@@@@@                   @@  @@@    @    @ @  @@              @@@@@            @@@@@@@   @@@@@@@@@@   @  @             
+    @@                       @@@    @@@@@@@@@@@      @@@@                @@   @@ @@ @@@                    @@@@    @@@@@@@@@@@@       @@@             @  @ 
+    @@                          @@@@@@@@   @@@@@@@@@@     @              @@@  @@@@@  @@@@@@@   @@       @@@@   @@@@@@@@@@@@@@ @@@@@@@@   @@           @  @     
+    @@                       @@@                      @@     @@@@     @@@@ @@@@@ @@ @   @ @@  @@ @@@@@@@    @@@@                   @@@@@@  @          @ @@ 
+     @                                                          @@@@ @@@@@@@@@   @@    @@  @@@@@@@@@@   @@@@                           @@@@             @         
+     @@                                                         @@@@@   @@@     @   @ @   @@  @@@                                                   @@             
+     @@                                      		     @@@@@@@@@@@         @@    @ @     @  @@     @                                         @@   @@
+     @@                                      @ @@@        @@@@@@@@@      @@   @@ @@@@  @@ @@  @@ @ @         @@@@   @  @@@                        @@@           
+ @   @@                                      @@      @     @       @@  @ @@   @@     @@@ @@@   @@   @@@@@           @@@    @@@@@              @@@@@     @    
+     @@                                  @           @@@@@@@@@  @  @@  @ @@ @@        @  @@@ @  @@@    @@@@@@      @@  @@@@                @@@@@@@@@    @           
+   @@@@       @@@@@                               @@@@@@@@    @@@  @      @@@   @@ @@@@@ @@      @@@@     @@@@@@@         @@@@@@           @@ @@@       @@             
+  @@        @@@@@@@@@@                  @@@@@@@@@@@@@ @@@   @ @@  @@        @@ @@@     @@@@@   @ @@@@@       @@@@@@@@@@                    @@           @@             
+  @   @     @@       @             @@@@@@@@@@@@@  @@@@   @ @@@@  @@      @@ @@@@ @@@    @@@@@  @    @@@@@        @@@@@@@@@@@@       @@@@@@@@@ @  @@@@@ @@@             
+  @ @@@    @                @@@@@@@@@@@@@               @  @@    @      @@@ @@@ @   @   @  @@   @@@     @@@@@  @       @@@@@@@@@@@@@@   @@@@  @     @   @@             
+  @        @@        @@@@@@@@@@@@@@@    @@@@@        @  @@ @  @    @@@@@@    @   @@          @@@@  @@        @@             @@@@@@@@@@@@@             @@@@             
+  @        @@     @@@@@@@@@@@                  @ @@@@@ @@  @  @      @@@   @@    @ @     @@@@          @@    @@@@@                  @@@@@@@@@          @@@             
+ @@        @@                 @@@@    @        @@@  @  @  @  @@   @    @   @@@ @@@ @@@@     @ @@           @      @   @     @@ @@@        @@@@@@@@     @ @             
+ @          @  @                  @ @    @@@            @@ @@@   @@@   @  @ @@         @@  @    @@@@  @@@     @ @@   @@     @ @    @@@ @        @@@@  @  @             
+   @@       @@ @     @  @@   @@@ @@@@   @@   @     @@@@@@@@@@    @   @@@  @  @   @@@@@    @       @  @  @@@@  @  @    @ @@  @@@      @@@@            @@  @             
+  @ @       @@      @@ @ @@   @@ @ @@    @@   @        @@  @  @  @        @@  @@ @ @@@ @      @@  @  @@   @@@@@  @    @ @ @       @   @  @  @ @@     @   @             
+  @ @       @@      @     @@      @  @   @@     @@@@   @@@  @@@  @@@@  @@@ @@@@  @@@ @@@@@@@@   @@     @@@  @@@@@@@       @ @    @@  @@  @  @  @ @@   @  @@            
+  @@@@      @@        @@     @@  @   @ @ @@ @   @@@@@@@@@@ @@    @     @   @@ @@  @@@    @@@@      @ @@ @@@   @@@@@@@@@@        @@  @    @  @  @  @ @  @ @@            
+   @ @      @  @     @  @    @@  @   @     @@@@      @@@@        @@@@@ @@@@@@ @@   @@@@@@@    @ @          @@  @@@      @@@@@       @   @@@    @    @  @ @@            
+   @ @ @    @   @   @@       @@  @   @     @   @@@@@@@           @@@@  @ @@@@   @@  @@@@@@@@@@@ @@@@@@@          @@@@@@@@@@@@  @   @@ @      @@@    @  @ @@            
+   @  @@@              @@@@  @   @@@@@   @   @  @@@@@         @    @@       @@@@@@@@@@@@@@@@@@ @@@ @@@@@   @@  @@    @@@@  @@@@@@@@@    @  @ @@ @@ @@@ @ @@            
+ @  @@ @@    @             @@@@       @ @@@@@@@@@      @@@@@@@@@@    @       @@@@@@     @@@@ @@@@@ @@  @@@@@@ @  @@      @@@@@@@       @  @@       @  @@ @@            
+    @@  @     @@@@@          @@@@ @      @@      @@@@  @@ @@@@@@@@@@@@@@@@@@@    @@@@@@@@@@  @@@@  @@@@@@@@@  @@ @@@          @@@@@@@@    @       @@  @@ @@            
+     @@@@       @@@@@@   @@@   @@ @@@@@@@      @@@@@  @@@        @     @@@@@@@@@@  @@ @@     @@@@@@@@@@@@@@@  @@@@@@ @@@@@        @@@@@@@    @        @@ @@            
+      @@@         @@@@@@   @@   @      @@@@    @     @@@@                      @@@@@@@@ @@@@@@@   @         @@@            @@@@         @@@@@ @@       @ @@            
+                    @@ @     @@  @@@       @@  @ @@@@@ @@                        @@@@@@@@@@@@              @@@    @@@@@@@@    @@@@@@     @@@  @@@@@  @ @ @@            
+                     @    @        @@@@@@@@    @@@@@   @@                                                 @@@  @  @   @@@@@@@@    @@@@@@@         @@@  @ @@            
+                     @              @@      @          @@                                                @@@@  @           @@@@@@     @@@@@@@@@@@    @@  @@            
+                     @@ @   @  @@@@@   @@@@          @ @@                                              @@@@         @@@@@@     @@@@@@    @@@         @   @@            
+                     @  @@   @@@@   @@@@       @       @@                                             @@     @@ @@@       @@@@@    @@@@    @@@@     @@   @@            
+                     @      @@@  @@@@   @@@@@ @         @                                          @@     @@@@@@@@@@@@@@@@@@@@@@@@@   @@@   @@@  @@  @   @@            
+                     @     @@@ @@@        @@@@   @@@ @@ @@                                   @@@@@@@   @@@@@  @@@@  @@@@@@      @@@@@@  @@@   @@     @   @@            
+                     @   @@@  @@   @@@@@      @@@@@@@@@@                                         @  @  @@@  @   @@@@    @@@@       @@@@@  @@   @     @   @@            
+                     @ @@@@    @@@@@@@@@@@@  @@@@@ @@@@                                       @@   @@        @   @@@@@@@@@@@@@@@      @@@  @@   @    @   @@            
+                                       @@@@@@@                                                  @@  @@        @@@            @@@@@    @@@@  @@  @   @    @@            
+                                                                                                  @@ @       @                          @@@  @@@@        @@            
+                     @   @                                              @@ @@@@@@@@@@@ @@@@@@@@@@@    @      @@@ @                       @    @@      @@@@             
+                     @@ @@                                          @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@     @@                     @@@       @@@@@@@             
+                     @@  @@@@                                        @                                       @@                           @@    @ @@                   
+                     @@    @@                                       @@@@@@@@@@@@@@@@@@@@@@@@@@@@@  @@@@@@ @@@@@@@@@@                       @@     @@                   
+                      @@@  @@                                         @@@@@@@@@@@@@@@@@@@@@    @@@@@@@@@@@@@@                              @@@  @@@                    
+                       @@@ @@                                                                   @                                       @@  @@ @@@          @@@@@@     
+                         @@@                                                                                                            @      @@                      
+                                                                               @        @@@@@@@   @@@@@                  @@@@@@@@@@    @@     @@@          @@@@@@      
+                                                                          @@@@@@@@@@  @@@@@@@@@@@@@@@@@@ @@@@@@     @@@@@@@@@@@@@@@@@@@@       @          @      @@    
+                               @                                  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ @@@@@@  @@@@@@@@  @ @      @@  @ @  @@                        
+                          @   @@@           @@@@@                @@@@@@@@@@@@@@@@@@@@@@        @       @     @@@@@@@  @@  @  @@ @@@ @     @ @@@         @@@@@@@@       
+                              @ @      @  @@    @@@@@@@@@@@@@@@@  @@      @                    @@@@@@@@@ @@@@ @@@   @@  @@@   @@ @ @@ @ @   @@         @@@@@@@@@@@@    
+                              @@@         @@ @@@  @@@@@@@@@@@@@@@@ @@@@@@@@@  @@@@  @@@       @@@@@@@@@             @  @@   @@@  @  @@@   @@           @          @@   
+           @                           @       @@   @        @@@@@   @@   @@@@@@@@@@@@@@@@@@@@@@        @@    @@  @  @@   @  @  @@   @ @ @@              @@@@@@@@@@    
+        @@@                              @@@    @@@   @  @@       @@@@@@@@@                    @@@@@@@@@  @@@@ @@ @ @@    @@     @@ @  @@@                             
+       @@ @                                @@@    @@@     @@@@@             @@@@@@@@@@@@@@@@@@@        @ @@       @@    @@@@  @  @@                   @@@@@@@@@@@@@@   
+     @@@@@ @                                 @     @@@@     @@@@@@@@@@@@@@@@@                  @@@@@@@@@@         @@@@ @@@    @  @@                   @            @   
+    @@@  @ @                                 @ @   @@@@@       @@@@   @@@@@@@@@@@@@@@@@@@@@@@@@@@ @@           @@@@ @ @@@     @@@@                      @@@@@@@@@@@@   
+   @@  @@@@@                                          @@@@@       @@  @                                             @ @@     @@@                 @ @@@@                
+  @@  @@@                                                @@@@@                    @                       @ @@        @@    @@@                    @@@@@@  @@@@@@@@@   
+ @@@  @                                                    @@@@@@  @@                                @ @@@@   @@@@    @@@@@@@                     @@  @@@@         @   
+ @   @@ @      @@                                       @       @@@@@@@@@@@@@@@@@@   @@@@@@@@@@@@@@@@@@@@  @@ @@   @@@@   @@                   @@@@@   @@@@@   @@@@@   
+ @   @@ @     @ @@@                                                  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@      @@@@ @@@@@    @                    @@@@@@@@@@@  @@@         
+ @   @       @@                                                                @  @@@@@@@@@@@@@@@       @@@@ @@@@@   @  @@                    @@@  @   @@@  @@@@   @   
+ @  @ @@@    @@   @                                                                                 @@@@@@@         @@ @@                     @@@        @@   @@@  @@  
+ @ @@@@@     @                                                                                    @@@@            @   @@@                    @@@@  @@  @@@@@    @@     
+   @@@@      @                                                                                                    @  @@                      @@ @@@@ @@   @@@    @@@   
+  @ @@       @                                      @@@                                                        @@@  @@                        @@@@@@@@@@   @@     @@@  
+ @@ @@        @                                   @@                                                        @ @@@   @                          @@  @@@@@ @@@@@     @@@ 
+ @@@@@                                            @ @  @@@                                              @@ @@@@ @  @                                 @@@@   @@@     @@ 
+  @@                                              @@ @@@ @@                                           @@@  @@@  @  @                                 @@@@@@@@@@@@    @ 
+ @@@                                                @   @@@                       @@                  @@  @@@ @@@  @                                 @@@      @ @    @ 
+ @@@ @                                              @@@@                        @@@ @ @              @@   @    @@ @@                 @               @@  @@ @@@@@@ @ @ 
+ @@@@@                                               @              @@  @@@    @@ @ @  @@    @@@ @@@  @@@ @@  @@  @                 @@@@@            @@@ @@  @ @@@@ @@ 
+ @@@                                                     @@@  @@@@ @@@@     @@@@ @@ @ @ @@@@     @ @@@    @  @@  @                  @  @@@@          @@@       @@  @ @ 
+ @                                                            @   @@ @  @@@         @ @       @ @@        @@@@@  @                @ @@  @@@@          @@@@  @@  @@ @@  
+ @@@@                                                         @@@@@@@@  @  @@@@  @  @ @@    @  @@    @@     @                    @@@@@    @@@         @@@@@  @@  @@  @ 
+ @ @                                                            @@      @      @@@@@@  @@  @@   @@@@ @  @                        @@    @    @@        @@@@@    @  @@@@ 
+ @@@                                                                            @        @@     @@@@@@   @                      @ @         @@         @@@ @@@@@   @ @ 
+ @@@                                                                                                                           @@  @   @@  @@          @@@  @ @@   @ @ 
+ @@@                                                                                                                          @@@  @       @@           @@@    @@  @@@ 
+ @ @                                                                                                                                      @@             @@@ @@ @ @  @ 
+   @                                                                                                                                     @@              @@@ @@ @   @@ 
+ @ @@@@                                                                                                                      @@         @@               @@@ @ @@    @ 
+ @@@ @@                                                                                                                      @@ @ @   @@@                @@ @@ @   @ @ 
+     @@                                                                                                                      @@      @@@                 @@ @@@@ @@@@@ 
+   @@@                                                                                                                        @     @@                    @@@@@@       
+  @@@@                                                                                                                    @@  @   @@@                     @@@@ @@ @@@@ 
+  @@@                                                                                                                    @@  @@ @@@                       @@@@  @@  @  
+ @@@                                                                                                                     @@    @@@                        @@@@   @   @ 
+ @@@                                                                                                                   @@@   @@@                           @@@@   @ @  
+ @@@                                                                                                                  @@@  @@@                             @@@   @@  @ 
+ @@@                                                                                                                @@@ @@@@                                @@@@@@@  @ 
+          </pre>
+        </div>
+        <div class="status-badge">system ready</div>
+      </div>
+
+      <!-- Coluna Direita: Informações do Perfil -->
+      <div class="info-column">
+        <h2 class="profile-title">railan@github</h2>
+
+        <div class="spec-table">
+          <div class="spec-key">OS:</div>
+          <div class="spec-value">Windows 11</div>
+
+          <div class="spec-key">Location:</div>
+          <div class="spec-value">São Paulo, Brazil</div>
+
+          <div class="spec-key">Education:</div>
+          <div class="spec-value">ADS → Software Engineering</div>
+
+          <div class="spec-key">Role:</div>
+          <div class="spec-value">Software Developer / QA</div>
+
+          <div class="spec-key">Languages:</div>
+          <div class="spec-value">Java, TypeScript, JavaScript</div>
+
+          <div class="spec-key">Frontend:</div>
+          <div class="spec-value">React, HTML, CSS</div>
+
+          <div class="spec-key">Backend:</div>
+          <div class="spec-value">Spring Boot, REST APIs</div>
+
+          <div class="spec-key">Database:</div>
+          <div class="spec-value">MySQL, PostgreSQL, Supabase</div>
+
+          <div class="spec-key">Tools:</div>
+          <div class="spec-value">Git, Docker, Postman</div>
+
+          <div class="spec-key">Cloud:</div>
+          <div class="spec-value">AWS</div>
+
+          <div class="spec-key">Methods:</div>
+          <div class="spec-value">Scrum, Kanban</div>
+
+          <div class="spec-key">Currently:</div>
+          <div class="spec-value">Building web projects</div>
+        </div>
+
+        <div class="contact-section">
+          <h3 class="contact-title">Contact</h3>
+          
+          <div class="contact-row">
+            <span class="spec-key">GitHub</span>
+            <a href="https://github.com/railan-santos" target="_blank" rel="noopener noreferrer">github.com/railan-santos</a>
+          </div>
+
+          <div class="contact-row">
+            <span class="spec-key">LinkedIn</span>
+            <a href="https://linkedin.com/in/railan-santos" target="_blank" rel="noopener noreferrer">linkedin.com/in/railan-santos</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>
